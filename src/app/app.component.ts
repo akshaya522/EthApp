@@ -12,8 +12,6 @@ export class AppComponent {
   latestTrans: any[] = [];
 
   Web3 = require('web3');
-
-
   private web3: Web3;
 
   constructor() {
