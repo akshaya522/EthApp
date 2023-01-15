@@ -1,6 +1,5 @@
 <div>
     <p-card>
-        
         <ng-template  pTemplate="header">
             <div class="card-padding">
                 <h5 style="font-weight: 600">Transaction Details</h5>
@@ -8,6 +7,7 @@
                     <p class="primary-colour">{{ trxn.hash }}</p> 
                     <p-tag *ngIf="trxn.status" style="margin-left: 10px " styleClass="mr-2" icon="pi pi-check" severity="success" value="Success"></p-tag>
                     <p-tag *ngIf="!trxn.status" style="margin-left: 10px " icon="pi pi-times" severity="danger" value="Danger"></p-tag>
+                    <p-button style="margin-left:auto; margin-right: 50px" pButton pRipple (onClick)="deletet()" type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></p-button>
                 </div>
             </div>
         </ng-template>
@@ -113,6 +113,5 @@
                 </p-tabPanel>
             </p-tabView>
         </div>
-
     </p-card>
 </div>

@@ -7,8 +7,8 @@ import { Web3Service } from '../web3-service';
   templateUrl: './trxn-card.component.html',
   styleUrls: ['./trxn-card.component.scss']
 })
-export class TrxnCardComponent {
 
+export class TrxnCardComponent {
   @Input() trxn!: Trxn;
 
   constructor(
@@ -27,5 +27,9 @@ export class TrxnCardComponent {
       this.trxn.gasUsed = res.gasUsed;
       this.trxn.logs = res.logs;
     });
+  }
+
+  deletet(): void {
+    console.log("deleting");
   }
 }
