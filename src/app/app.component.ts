@@ -17,6 +17,7 @@ export class AppComponent {
   searchResults: any[] = [];
   hashRegex = /^0x([A-Fa-f0-9]{64})$/;
   blockRegex = /^[1-9]\d*$/;
+  
   latestBlocks: any[] = [];
   latestTrans: any[] = [];
 
@@ -121,13 +122,21 @@ export class AppComponent {
 
     if (event.query.match(this.hashRegex)) {
       await this.web3Service.getTrxn(searchVal).then(res => {
-        this.searchField = "hash";
-        this.searchResult = [res];
+        if (res) {
+          this.searchField = "hash";
+          this.searchResult = [res];
+        } else {
+          this.messageService.add({severity:'warn', summary:'Search Error', detail:'No transaction found using hash'});
+        }
       });
     } else if (event.query.match(this.blockRegex)) {
       await this.web3Service.getBlock(event.query).then(res => {
-        this.searchField = "number";
-        this.searchResult = [res];
+        if (res) {
+          this.searchField = "number";
+          this.searchResult = [res];
+        } else {
+          this.messageService.add({severity:'warn', summary:'Search Error', detail:'No block found using block number'});
+        }
       })
     } else {
         this.messageService.add({severity:'error', summary:'Search Error', detail:'Please enter a hash or block number'});

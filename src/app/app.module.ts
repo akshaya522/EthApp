@@ -9,6 +9,8 @@ import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
+import { ButtonModule } from 'primeng/button';
+import {TableModule} from 'primeng/table';
 
 import { AppComponent } from './app.component';
 import { TrxnCardComponent } from './trxn-card/trxn-card.component';
@@ -32,7 +34,9 @@ import { MessageService } from 'primeng/api';
     CardModule,
     TabViewModule,
     ToastModule,
-    TagModule
+    TagModule,
+    ButtonModule,
+    TableModule
   ],
   providers: [
     Web3Service,
