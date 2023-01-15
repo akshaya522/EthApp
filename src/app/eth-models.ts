@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface Trxn {
     accessList: any[];
     blockHash: string;
     blockNumber: number;
@@ -39,7 +39,7 @@ export interface Block {
     stateRoot: string; 
     timestamp: number; 
     totalDifficulty: string;
-    transactions: Transaction[];
+    transactions: Trxn[];
     transactionsRoot: string;
     uncles?: any[];
 }

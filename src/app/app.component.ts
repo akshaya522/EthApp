@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import Web3 from 'web3';
-import { Transaction, Block } from './eth-models';
+import { Trxn, Block } from './eth-models';
+import { Web3Service } from './web3-service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,20 @@ import { Transaction, Block } from './eth-models';
 export class AppComponent {
 
   searchVal = "";
-  searchResults: any[]= [];
+  searchField = "";
+  searchResult: any[] = [];
+  searchResults: any[] = [];
   hashRegex = /^0x([A-Fa-f0-9]{64})$/;
   latestBlocks: any[] = [];
   latestTrans: any[] = [];
-  string1 = ["apple", "bababa", "ndkjs"];
 
   Web3 = require('web3');
   private web3: Web3;
 
-  constructor() {
+
+  constructor(
+    private web3Service: Web3Service
+  ) {
     this.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/391046210a5340e59239df98766bb12e'));
   }
 
@@ -110,23 +115,19 @@ export class AppComponent {
 
   async searchBy(event: any) {
     let searchVal: string = event.query;
-    let result; 
 
-    if (searchVal.match(this.hashRegex)){
-      await this.web3.eth.getTransaction(searchVal, function(err, res) {
-        if (res) {
-          result = res;
-        }
+    if (event.query.match(this.hashRegex)) {
+      await this.web3Service.getTrxn(searchVal).then(res => {
+        this.searchField = "hash";
+        this.searchResult = [res];
+        this.searchResults.push(res);
       });
-      this.searchResults.push(result);
+    } else {
+      await this.web3Service.getBlock(event.query).then(res => {
+        this.searchField = "number";
+        this.searchResult = [res];
+        this.searchResults.push(res);
+      })
     }
-
-    console.log("this.search", this.searchResults.map(i => i.hash));
-
-    this.searchVal = "0x5d1a73e96116974976c0aedf7cbabeb33c9e1d9544c7d8131fee23de7a972dca";
-  }
-
-  getField() {
-    return "number";
   }
 }
