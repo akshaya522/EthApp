@@ -2,6 +2,7 @@ import { Component, Pipe } from '@angular/core';
 import Web3 from 'web3';
 import { Trxn, Block } from './eth-models';
 import { Web3Service } from './web3-service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
   searchResult: any[] = [];
   searchResults: any[] = [];
   hashRegex = /^0x([A-Fa-f0-9]{64})$/;
+  blockRegex = /^[1-9]\d*$/;
   latestBlocks: any[] = [];
   latestTrans: any[] = [];
 
@@ -23,7 +25,8 @@ export class AppComponent {
 
 
   constructor(
-    private web3Service: Web3Service
+    private web3Service: Web3Service,
+    private messageService: MessageService
   ) {
     this.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/391046210a5340e59239df98766bb12e'));
   }
@@ -121,11 +124,13 @@ export class AppComponent {
         this.searchField = "hash";
         this.searchResult = [res];
       });
-    } else {
+    } else if (event.query.match(this.blockRegex)) {
       await this.web3Service.getBlock(event.query).then(res => {
         this.searchField = "number";
         this.searchResult = [res];
       })
+    } else {
+        this.messageService.add({severity:'error', summary:'Search Error', detail:'Please enter a hash or block number'});
     }
   }
 
