@@ -1,1 +1,86 @@
-<p>block card!</p>
+<div>
+    <p-card>
+        <ng-template  pTemplate="header">
+            <div class="card-padding">
+                <h5 style="font-weight: 600">Block Details</h5>
+                <div class="flex">
+                    <p class="primary-colour"># {{ block.number }}</p> 
+                    <p-button style="margin-left:auto; margin-right: 50px" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></p-button>
+                </div>
+            </div>
+        </ng-template>
+
+        <div class="row">
+            <p-tabView>
+                <p-tabPanel header="Overview">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="flex">
+                                <p class="card-label">Fee Recipient: </p>
+                                <p>{{ block.miner }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Timestamp: </p>
+                                <p>{{ block.timestamp }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Transaction Root: </p>
+                                <p>{{ block.transactionsRoot }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Total Difficulty: </p>
+                                <p>{{ block.totalDifficulty }}</p>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="flex">
+                                <p class="card-label">Size: </p>
+                                <p>{{ block.size }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Gas Used: </p>
+                                <p>{{ block.gasUsed }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Gas Limit: </p>
+                                <p>{{ block.gasLimit }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Base Fee Per Gas: </p>
+                                <p>{{ block.baseFeePerGas }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Transactions">
+                    <div class="row">
+                        <div class="col-1">
+                            <p-tag style="margin-left: 10px " icon="pi pi-check" severity="success" value="{{block.transactions.length}} Transactions"></p-tag>
+                        </div>
+                        <div class="col-11">
+                            <p-table 
+                                [value]="block.transactions" 
+                                [paginator]="true" 
+                                [rows]="5" 
+                                [showCurrentPageReport]="true" 
+                                [tableStyle]="{'min-width': '50rem'}"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,25,50]"
+                            >
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:25%">Transaction Hash</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-trxn>
+                                    <tr>
+                                        <td>{{trxn}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </p-card>
+</div>
