@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {AccordionModule} from 'primeng/accordion';     
-import {MenuItem} from 'primeng/api';    
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { FormsModule }   from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import {MenuItem} from 'primeng/api';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AccordionModule
+    AutoCompleteModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

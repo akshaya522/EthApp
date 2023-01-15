@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import Web3 from 'web3';
+import { Transaction, Block } from './eth-models';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,13 @@ import Web3 from 'web3';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'eth-app';
+
+  searchVal = "";
+  searchResults: any[]= [];
+  hashRegex = /^0x([A-Fa-f0-9]{64})$/;
   latestBlocks: any[] = [];
   latestTrans: any[] = [];
+  string1 = ["apple", "bababa", "ndkjs"];
 
   Web3 = require('web3');
   private web3: Web3;
@@ -101,5 +106,27 @@ export class AppComponent {
     console.log("blocks: ", this.latestBlocks);
     await this.getLatestTransactions(latestTransStrs);
     console.log("trans: ", this.latestTrans);
+  }
+
+  async searchBy(event: any) {
+    let searchVal: string = event.query;
+    let result; 
+
+    if (searchVal.match(this.hashRegex)){
+      await this.web3.eth.getTransaction(searchVal, function(err, res) {
+        if (res) {
+          result = res;
+        }
+      });
+      this.searchResults.push(result);
+    }
+
+    console.log("this.search", this.searchResults.map(i => i.hash));
+
+    this.searchVal = "0x5d1a73e96116974976c0aedf7cbabeb33c9e1d9544c7d8131fee23de7a972dca";
+  }
+
+  getField() {
+    return "number";
   }
 }
