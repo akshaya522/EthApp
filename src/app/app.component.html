@@ -11,6 +11,7 @@
             [(ngModel)]="searchVal"
             [suggestions]="searchResult" 
             (completeMethod)="searchBy($event)"
+            (onSelect)="searchOnSelect()"
             [field]="searchField"
             placeholder="Search by hash or block number"
             [size]="80"
@@ -20,4 +21,15 @@
       </div>
     </div>
   </div> 
+
+  <div class="row" *ngIf="searchResults.length > 0">
+    <div *ngFor="let res of searchResults">
+      <div *ngIf="res.number">
+        <app-block-card></app-block-card>
+      </div>
+      <div *ngIf="!res.number">
+        <app-trxn-card [trxn]="res"></app-trxn-card>
+      </div>
+    </div>
+  </div>
 </div>

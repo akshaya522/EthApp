@@ -18,6 +18,10 @@ export interface Trxn {
     type: number; 
     v: string; 
     value: string; 
+    status: boolean;
+    cumulativeGasUsed: number;
+    gasUsed: number; 
+    logs: any[];
 }
 
 export interface Block {

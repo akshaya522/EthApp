@@ -120,14 +120,17 @@ export class AppComponent {
       await this.web3Service.getTrxn(searchVal).then(res => {
         this.searchField = "hash";
         this.searchResult = [res];
-        this.searchResults.push(res);
       });
     } else {
       await this.web3Service.getBlock(event.query).then(res => {
         this.searchField = "number";
         this.searchResult = [res];
-        this.searchResults.push(res);
       })
     }
+  }
+
+  searchOnSelect(): void {
+    this.searchResults.push(this.searchResult[0]);
+    this.searchVal = "";
   }
 }

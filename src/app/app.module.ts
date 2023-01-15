@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CardModule } from 'primeng/card';
+import {TabViewModule} from 'primeng/tabview';
 
-import { Web3Service } from './web3-service';
+import { AppComponent } from './app.component';
 import { TrxnCardComponent } from './trxn-card/trxn-card.component';
 import { BlockCardComponent } from './block-card/block-card.component';
 
+import { Web3Service } from './web3-service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { BlockCardComponent } from './block-card/block-card.component';
     AppRoutingModule,
     AutoCompleteModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CardModule,
+    TabViewModule
   ],
   providers: [
     Web3Service

@@ -1,0 +1,21 @@
+.card-padding {
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+    padding-left: 1.25rem;
+}
+
+.card-label {
+    font-weight: 500;
+    margin-right: 50px;
+}
+
+:host::ng-deep .p-card .p-card-content {
+    padding: 0rem 0;
+}
+
+:host::ng-deep .p-card .p-card-body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}

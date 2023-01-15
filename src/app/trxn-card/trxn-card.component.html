@@ -1,0 +1,112 @@
+<div>
+    <p-card>
+        <ng-template  pTemplate="header">
+            <div class="card-padding">
+                <h5 style="font-weight: 600">Transaction Details</h5>
+                <p class="primary-colour">{{ trxn.hash }}</p>
+            </div>
+        </ng-template>
+
+        <div class="row">
+            <p-tabView>
+                <p-tabPanel header="Overview">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="flex">
+                                <p class="card-label">Block: </p>
+                                <p>{{ trxn.blockNumber }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Block Hash: </p>
+                                <p>{{ trxn.blockHash }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">From: </p>
+                                <p>{{ trxn.from }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">To: </p>
+                                <p>{{ trxn.to }}</p>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="flex">
+                                <p class="card-label">Value: </p>
+                                <p>0.{{ trxn.value }} Ether</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Transaction Fee: </p>
+                                <p>{{ trxn.maxFeePerGas }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Gas Price: </p>
+                                <p>{{ trxn.gasPrice }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Ether Price: </p>
+                                <p>{{ trxn.to }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="More Details">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="flex">
+                                <p class="card-label">Gas Limit: </p>
+                                <p>{{ trxn.gas }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Gas Usage by Transaction: </p>
+                                <p>{{ trxn.gasUsed}}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Max Fee Per Gas: </p>
+                                <p>{{ trxn.maxFeePerGas }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Max Priority Fee Per Gas: </p>
+                                <p>{{ trxn.maxPriorityFeePerGas }}</p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="flex">
+                                <p class="card-label">Transaction Type: </p>
+                                <p>0.{{ trxn.type }} Ether</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Nonce: </p>
+                                <p>{{ trxn.nonce }}</p>
+                            </div>
+                            <div class="flex">
+                                <p class="card-label">Position in Block: </p>
+                                <p>{{ trxn.transactionIndex }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel *ngIf="trxn.logs.length > 0" header="Logs">
+                    <p class="card-label">Transaction Receipt Event Logs</p>
+                    <div *ngFor="let log of trxn.logs">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="flex">
+                                    <p class="card-label">Address: </p>
+                                    <p>{{ log.address }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p class="card-label">Topics: </p>
+                                    <span *ngFor="let topic of log.topics" >{{ topic }} </span>
+                                </div>
+                                <div class="flex">
+                                    <p class="card-label">Data: </p>
+                                    <p>{{ log.data }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </p-card>
+</div>

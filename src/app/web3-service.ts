@@ -15,6 +15,10 @@ export class Web3Service {
         return await this.web3.eth.getTransaction(hash);
     }
 
+    async getTrxnReceipt(hash: string) {
+        return await this.web3.eth.getTransactionReceipt(hash);
+    }
+
     async getBlock(blockNum: number) {
         return await this.web3.eth.getBlock(blockNum);
     }
